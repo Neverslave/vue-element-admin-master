@@ -8,9 +8,8 @@
     </section>
     <div class="el-tree-container">
       <el-tree
-        :props="category"
+        :props="categoryList"
         show-checkbox="true"
-
         @node-click="handleNodeClick(data)"
       />
     </div>
@@ -24,15 +23,30 @@ export default {
 
   data() {
     return {
+      category:{
+
+      }
 
     }
   },
+  created(){
+    this.$store.dispatch('category/getCategoryList').then(
+      this.categoryList = $store.category
+    )
+  },
   methods: {
 
+  },
+  computed(){
+    categoryList(){
+
+    }
   }
 }
 </script>
 
 <style scoped>
-
+.category-container{
+  margin:50px;
+}
 </style>
