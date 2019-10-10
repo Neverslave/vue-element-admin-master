@@ -8,7 +8,7 @@
     </section>
     <div class="el-tree-container">
       <el-tree
-        :props="categoryList"
+        :props="category"
         show-checkbox="true"
         @node-click="handleNodeClick(data)"
       />
@@ -18,29 +18,38 @@
 </template>
 
 <script>
+  import {getCategory} from "@/api/category";
 export default {
   name: 'Index',
 
   data() {
     return {
       category:{
-
-      }
+        label:'',
+        children:[],
+        disabled:'',
+        isLeaf:''
+   }
 
     }
   },
-  created(){
-    this.$store.dispatch('category/getCategoryList').then(
+  created: function () {
+/*    this.$store.dispatch('category/getCategoryList').then(
       this.categoryList = $store.category
-    )
+    )*/
+   return new Promise((resolve,reject) =>{
+     getCategory().then(
+       response=>{
+         this.category = response
+       }
+     )
+   } )
+
   },
   methods: {
 
   },
   computed(){
-    categoryList(){
-
-    }
   }
 }
 </script>

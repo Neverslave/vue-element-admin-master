@@ -31,11 +31,11 @@ const actions= {
       getCategory().then(
         response => {
           const {data} = response
-          const {label, children, disabled, isleaf} = data
+          const {label, children, disabled, isLeaf} = data
           commit('SET_LABEL', label)
           commit('SET_CHILDREN', children)
           commit('SET_DISABLED', disabled)
-          commit('SET_ISLEAF', isleaf)
+          commit('SET_ISLEAF', isLeaf)
           resolve(data)
         })
     }).catch(error => {
