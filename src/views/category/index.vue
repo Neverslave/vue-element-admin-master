@@ -40,7 +40,7 @@ export default {
    return new Promise((resolve,reject) =>{
      getCategory().then(
        response=>{
-         this.category = response
+         this.category = response.data
        }
      )
    } )
