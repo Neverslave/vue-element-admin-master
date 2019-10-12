@@ -54,11 +54,10 @@ export default {
     checkCategory(currentNode,ischecked,isLeafChecked){
    if(ischecked===true){
      this.$refs.categoryTree.setCheckedKeys([currentNode.id])
-   }else{
-
    }
+    },
 
-    }
+
 
   },
 
