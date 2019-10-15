@@ -40,7 +40,7 @@
 </template>
 
 <script>
-  import {getCategory} from "@/api/category";
+  import {getCategory,addCategory} from "@/api/category";
 export default {
   name: 'Index',
   data() {
@@ -49,6 +49,7 @@ export default {
       inputCategory:{
         id:'',
         label:'',
+        subCategoryId:''
         subCategory:{
           label:'',
           id:''
@@ -56,7 +57,12 @@ export default {
       },
       isShow:false,
       type:0,
-      isFirst : false
+      isFirst : false,
+      postCategory:{
+        label:'',
+        id:'',
+        subCategoryId:''
+      }
 
     }
   },
@@ -74,7 +80,6 @@ export default {
 
   },
   methods: {
-
     checkCategory(currentNode,ischecked,isLeafChecked){
       let parentNode;
       if (ischecked === true) {
@@ -90,6 +95,9 @@ export default {
       if(this.inputCategory.subCategory.length ===undefined){
       this.isFirst = true;
       }
+      this.type=1
+
+
 
     },
 
@@ -97,9 +105,36 @@ export default {
 
     confirm(type){
       //type=1 新增 type= 2修改 type = 0 do nothing
+      if(type ===1){
+        this.postCategory.label=this.inputCategory.label;
+        this.postCategory.subCategoryId=this.inputCategory.subCategoryId;
+        new Promise(((resolve, reject) =>{
+          addCategory(this.postCategory).then(
+            response=>{
+              if(response.code=20000){
+                this.$notify.success({
+                  title:'成功',
+                  message:'分类添加成功',
+                  type:'success'
+                })
+              }
+            }
+          ).andThen(() => {
+            new Promise((resolve,reject) =>{
+              getCategory().then(
+                response=>{
+                  this.category = response.data
+                }
+              )
+            } )
+          });
+        } ))
+      }
+      //修改
       if(type ===2){
 
       }
+
     },
     //关闭修改框
     cancel(){

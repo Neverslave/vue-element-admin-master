@@ -7,3 +7,11 @@ export function getCategory() {
   })
 }
 
+export function addCategory(data) {
+  return request({
+    url:'/category/add',
+    method:'post',
+    data
+  })
+}
+
