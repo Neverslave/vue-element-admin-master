@@ -49,7 +49,7 @@ export default {
       inputCategory:{
         id:'',
         label:'',
-        subCategoryId:''
+        subCategoryId:'',
         subCategory:{
           label:'',
           id:''
@@ -59,6 +59,7 @@ export default {
       type:0,
       isFirst : false,
       postCategory:{
+        name:'',
         label:'',
         id:'',
         subCategoryId:''
@@ -81,12 +82,11 @@ export default {
   },
   methods: {
     checkCategory(currentNode,ischecked,isLeafChecked){
-      let parentNode;
+
       if (ischecked === true) {
-        this.$refs.categoryTree.setCheckedKeys([currentNode.id])
-        parentNode = this.$refs.categoryTree.getNode(currentNode.id).parent.data;
-        console.log(parentNode)
-        this.inputCategory.subCategory=parentNode;
+        this.$refs.categoryTree.setCheckedKeys([currentNode.id]);
+        Node = this.$refs.categoryTree.getNode(currentNode.id);
+        this.inputCategory.subCategory= Node
       }
 
     },
@@ -100,13 +100,10 @@ export default {
 
 
     },
-
-
-
-    confirm(type){
+    confirm(){
       //type=1 新增 type= 2修改 type = 0 do nothing
-      if(type ===1){
-        this.postCategory.label=this.inputCategory.label;
+      if(this.type ===1){
+        this.postCategory.name=this.inputCategory.label;
         this.postCategory.subCategoryId=this.inputCategory.subCategoryId;
         new Promise(((resolve, reject) =>{
           addCategory(this.postCategory).then(
@@ -131,7 +128,7 @@ export default {
         } ))
       }
       //修改
-      if(type ===2){
+      if(this.type ===2){
 
       }
 
