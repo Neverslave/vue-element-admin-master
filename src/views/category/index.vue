@@ -22,8 +22,8 @@
 
     <div class="category-input-container" v-show="isShow">
         <el-form ref="categoryInputForm" label-position="left" label-width="80">
-       <el-form-item label="上级菜单"  v-if="isFirst">
-            <el-input v-model="inputCategory.subCategory.label" style="width: 30%;"   :disabled="true" size="small">
+       <el-form-item label="上级菜单"  v-if="notFirst">
+            <el-input v-model="inputCategory.supCategory.label" style="width: 30%;"   :disabled="true" size="small">
             </el-input>
        </el-form-item>
           <el-form-item label="分类名称">
@@ -49,20 +49,20 @@ export default {
       inputCategory:{
         id:'',
         label:'',
-        subCategoryId:'',
-        subCategory:{
+        supCategoryId:'',
+        supCategory:{
           label:'',
           id:''
         },
       },
       isShow:false,
       type:0,
-      isFirst : false,
+      notFirst : false,
       postCategory:{
         name:'',
         label:'',
         id:'',
-        subCategoryId:''
+        supCategoryId: null
       }
 
     }
@@ -82,18 +82,22 @@ export default {
   },
   methods: {
     checkCategory(currentNode,ischecked,isLeafChecked){
-
       if (ischecked === true) {
         this.$refs.categoryTree.setCheckedKeys([currentNode.id]);
         Node = this.$refs.categoryTree.getNode(currentNode.id);
-        this.inputCategory.subCategory= Node
+        this.inputCategory.supCategory= Node
+        this.inputCategory.supCategoryId = Node.data.id;
       }
-
+      else{
+        console.log(1)
+       // this.inputCategory.supCategory.label=''
+        this.inputCategory.supCategoryId=null;
+      }
     },
     addCategory(){
       this.isShow = true
-      if(this.inputCategory.subCategory.length ===undefined){
-      this.isFirst = true;
+      if(this.inputCategory.supCategory.length ===undefined){
+      this.notFirst = true;
       }
       this.type=1;
     },
@@ -101,7 +105,9 @@ export default {
       //type=1 新增 type= 2修改 type = 0 do nothing
       if(this.type ===1){
         this.postCategory.name=this.inputCategory.label;
-        this.postCategory.subCategoryId=this.inputCategory.subCategoryId;
+        if(this.notFirst === true){
+        this.postCategory.supCategoryId=this.inputCategory.supCategoryId;
+        }
         new Promise(((resolve, reject) =>{
           addCategory(this.postCategory).then(
             response=>{
@@ -117,14 +123,9 @@ export default {
             new Promise((resolve,reject) =>{
               getCategory().then(
                 response=>{
-                  console.log(1)
                   this.category = response.data;
-                  this.inputCategory={
-                    label:'',
-                    subCategoryId:'',
-                    id:''
-                  } ;
-                  console.log(2)
+                  this.inputCategory.label=''
+                  this.inputCategory.supCategoryId=null
                   this.isShow = false;
 
                 }
@@ -141,11 +142,8 @@ export default {
     },
     //关闭修改框
     cancel(){
-      this.inputCategory = {
-        label:'',
-        subCategoryId:'',
-        id:''
-      } ;
+      this.inputCategory.id=null;
+      this.inputCategory.label=''
       this.isShow=false
     }
 
