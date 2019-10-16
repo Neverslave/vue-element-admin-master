@@ -95,10 +95,7 @@ export default {
       if(this.inputCategory.subCategory.length ===undefined){
       this.isFirst = true;
       }
-      this.type=1
-
-
-
+      this.type=1;
     },
     confirm(){
       //type=1 新增 type= 2修改 type = 0 do nothing
@@ -116,11 +113,20 @@ export default {
                 })
               }
             }
-          ).andThen(() => {
+          ).then(() => {
             new Promise((resolve,reject) =>{
               getCategory().then(
                 response=>{
-                  this.category = response.data
+                  console.log(1)
+                  this.category = response.data;
+                  this.inputCategory={
+                    label:'',
+                    subCategoryId:'',
+                    id:''
+                  } ;
+                  console.log(2)
+                  this.isShow = false;
+
                 }
               )
             } )
@@ -135,7 +141,11 @@ export default {
     },
     //关闭修改框
     cancel(){
-      this.inputCategory={}
+      this.inputCategory = {
+        label:'',
+        subCategoryId:'',
+        id:''
+      } ;
       this.isShow=false
     }
 
