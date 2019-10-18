@@ -29,9 +29,9 @@
           <el-form-item label="分类名称">
             <el-input type="" v-model="inputCategory.label" style="width: 30%;"  ></el-input>
           </el-form-item>
-          <div style="width:30% ;margin-left: 10%;" >
+          <div style="margin-left: 10%;" >
           <el-button type="primary" icon="el-icon-check" @click="confirm">确定</el-button>
-          <el-button type="danger" icon="el-icon-close"@click="cancel">取消</el-button>
+          <el-button type="danger" icon="el-icon-close" @click="cancel">取消</el-button>
           </div>
         </el-form>
     </div>
@@ -89,8 +89,9 @@ export default {
         this.inputCategory.supCategoryId = Node.data.id;
       }
       else{
-        console.log(1)
-       // this.inputCategory.supCategory.label=''
+       this.inputCategory.supCategory={
+         label:''
+       }
         this.inputCategory.supCategoryId=null;
       }
     },
