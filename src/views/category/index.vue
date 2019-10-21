@@ -2,7 +2,7 @@
   <div class="category-container">
     <section class="buttons">
       <el-button type="primary" icon="el-icon-edit" @click="addCategory">新增</el-button>
-      <el-button type="info" icon="el-icon-share">修改</el-button>
+      <el-button type="info" icon="el-icon-share" @click="changeCategory">修改</el-button>
       <el-button type="danger" icon="el-icon-delete">删除</el-button>
       <el-button type="primary" icon="el-icon-search">搜索</el-button>
     </section>
@@ -23,7 +23,7 @@
     <div class="category-input-container" v-show="isShow">
         <el-form ref="categoryInputForm" label-position="left" label-width="80">
        <el-form-item label="上级菜单"  v-if="notFirst">
-            <el-input v-model="inputCategory.supCategory.label" style="width: 30%;"   :disabled="true" size="small">
+            <el-input v-model="inputCategory.supCategory.label" style="width: 30%;"   :disabled=inputCategory.supCategoryDisabled size="small">
             </el-input>
        </el-form-item>
           <el-form-item label="分类名称">
@@ -50,9 +50,11 @@ export default {
         id:'',
         label:'',
         supCategoryId:'',
+        supCategoryDisabled:true,
         supCategory:{
           label:'',
           id:''
+
         },
       },
       isShow:false,
@@ -101,6 +103,12 @@ export default {
       this.notFirst = true;
       }
       this.type=1;
+    },
+    changeCategory(){
+      this.type=2;
+      this.inputCategory.supCategoryDisabled= false;
+
+
     },
     confirm(){
       //type=1 新增 type= 2修改 type = 0 do nothing

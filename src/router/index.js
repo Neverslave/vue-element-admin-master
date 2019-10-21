@@ -209,12 +209,12 @@ export const asyncRoutes = [
   tableRouter,
 
   {
-    path: '/example',
+    path: '/article',
     component: Layout,
-    redirect: '/example/list',
-    name: 'Example',
+    redirect: '/article/list',
+    name: 'article',
     meta: {
-      title: 'Example',
+      title: '文章',
       icon: 'example'
     },
     children: [
