@@ -208,6 +208,7 @@ export const asyncRoutes = [
   nestedRouter,
   tableRouter,
 
+
   {
     path: '/article',
     component: Layout,
@@ -220,20 +221,20 @@ export const asyncRoutes = [
     children: [
       {
         path: 'create',
-        component: () => import('@/views/example/create'),
+        component: () => import('@/views/article/create'),
         name: 'CreateArticle',
         meta: { title: '新建文章', icon: 'edit' }
       },
       {
         path: 'edit/:id(\\d+)',
-        component: () => import('@/views/example/edit'),
+        component: () => import('@/views/article/edit'),
         name: 'EditArticle',
-        meta: { title: '编辑文章', noCache: true, activeMenu: '/example/list' },
+        meta: { title: '编辑文章', noCache: true, activeMenu: '/article/list' },
         hidden: true
       },
       {
         path: 'list',
-        component: () => import('@/views/example/list'),
+        component: () => import('@/views/article/list'),
         name: 'ArticleList',
         meta: { title: '文章列表', icon: 'list' }
       }
