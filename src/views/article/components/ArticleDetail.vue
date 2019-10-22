@@ -27,7 +27,7 @@
               <el-row>
                 <el-col :span="8">
                   <el-form-item label-width="60px" label="作者:" class="postInfo-container-item">
-                    <el-select v-model="postForm.author" :remote-method="getRemoteUserList" filterable default-first-option remote placeholder="Search user">
+                    <el-select v-model="postForm.author" :remote-method="getRemoteUserList" filterable default-first-option remote placeholder="查找作者">
                       <el-option v-for="(item,index) in userListOptions" :key="item+index" :label="item" :value="item" />
                     </el-select>
                   </el-form-item>
@@ -35,7 +35,7 @@
 
                 <el-col :span="10">
                   <el-form-item label-width="120px" label="发表时间:" class="postInfo-container-item">
-                    <el-date-picker v-model="displayTime" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="Select date and time" />
+                    <el-date-picker v-model="displayTime" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="选择发表时间" />
                   </el-form-item>
                 </el-col>
 
@@ -57,7 +57,7 @@
         </el-row>
 
         <el-form-item style="margin-bottom: 40px;" label-width="70px" label="摘要:">
-          <el-input v-model="postForm.content_short" :rows="1" type="textarea" class="article-textarea" autosize placeholder="Please enter the content" />
+          <el-input v-model="postForm.content_short" :rows="1" type="textarea" class="article-textarea" autosize placeholder="请输入内容" />
           <span v-show="contentShortLength" class="word-counter">{{ contentShortLength }}words</span>
         </el-form-item>
 
@@ -111,10 +111,10 @@ export default {
     const validateRequire = (rule, value, callback) => {
       if (value === '') {
         this.$message({
-          message: rule.field + '为必传项',
+          message: rule.field + '为必输项',
           type: 'error'
         })
-        callback(new Error(rule.field + '为必传项'))
+        callback(new Error(rule.field + '为必输项'))
       } else {
         callback()
       }
@@ -215,6 +215,7 @@ export default {
             type: 'success',
             duration: 2000
           })
+          console.log(this.postForm.content)
           this.postForm.status = 'published'
           this.loading = false
         } else {
