@@ -1,7 +1,7 @@
 <template>
   <el-dropdown :hide-on-click="false" :show-timeout="100" trigger="click">
     <el-button plain>
-      Platfroms({{ platforms.length }})
+      {{category}}
       <i class="el-icon-caret-bottom el-icon--right" />
     </el-button>
     <el-dropdown-menu slot="dropdown" class="no-border">
@@ -25,7 +25,7 @@ export default {
   },
   data() {
     return {
-      platformsOptions: [
+      categories: [
         { key: 'a-platform', name: 'a-platform' },
         { key: 'b-platform', name: 'b-platform' },
         { key: 'c-platform', name: 'c-platform' }
@@ -33,7 +33,7 @@ export default {
     }
   },
   computed: {
-    platforms: {
+    category: {
       get() {
         return this.value
       },
