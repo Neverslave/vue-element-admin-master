@@ -5,8 +5,8 @@
       <i class="el-icon-caret-bottom el-icon--right" />
     </el-button>
     <el-dropdown-menu slot="dropdown" class="no-border">
-      <el-select v-model="platforms" style="padding: 5px 15px;">
-        <el-option v-for="item in categories" :value="item.id" :label="item.label">
+      <el-select v-model="category" style="padding: 5px 15px;">
+        <el-option v-for="item in categories" :value="item.key" :label="item.value">
         </el-option>
       </el-select>
     </el-dropdown-menu>
@@ -25,18 +25,13 @@ export default {
   data() {
     return {
       categories: [
-      ]
+      ],
+      category: '请选择分类'
+
     }
   },
   computed: {
-    category: {
-      get() {
-        return this.value
-      },
-      set(val) {
-        this.$emit('input', val)
-      }
-    }
+
   }
 }
 </script>

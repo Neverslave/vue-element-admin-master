@@ -15,6 +15,12 @@ export function fetchArticle(id) {
     params: { id }
   })
 }
+export  function fetchCategory() {
+  return request({
+    url:'/category/getCategories',
+    method:'get',
+  })
+}
 
 export function fetchPv(pv) {
   return request({
