@@ -6,7 +6,7 @@
     </el-button>
     <el-dropdown-menu slot="dropdown" class="no-border">
       <el-select v-model="category" style="padding: 5px 15px;">
-        <el-option v-for="item in categories" :value="item.key" :label="item.value">
+        <el-option v-for="item in options" :value="item.id" :label="item.label">
         </el-option>
       </el-select>
     </el-dropdown-menu>
@@ -17,21 +17,19 @@
 export default {
   props: {
     value: {
-      required: true,
-      default: () => [],
-      type: Array
+
+    },
+    options:{
+      required:true,
+      type:Array
     }
   },
   data() {
     return {
-      categories: [
-      ],
       category: '请选择分类'
 
     }
   },
-  computed: {
 
-  }
 }
 </script>
