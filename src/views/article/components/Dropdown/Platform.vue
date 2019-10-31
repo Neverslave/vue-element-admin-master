@@ -30,5 +30,12 @@ export default {
 
     }
   },
+  computed:{
+    categoryName:{
+      get:{
+        
+      }
+    }
+  }
 }
 </script>
