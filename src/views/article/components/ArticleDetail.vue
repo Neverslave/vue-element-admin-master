@@ -4,7 +4,7 @@
 
       <sticky :z-index="10" :class-name="'sub-navbar '+postForm.status">
         <CommentDropdown v-model="postForm.comment_disabled" />
-        <PlatformDropdown v-model="postForm.categories" />
+        <PlatformDropdown v-model="postForm.category" :options = "this.categories"/>
         <SourceUrlDropdown v-model="postForm.source_uri" />
         <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">
           发表
@@ -93,7 +93,7 @@ const defaultForm = {
   image_uri: '', // 文章图片
   display_time: undefined, // 前台展示时间
   id: undefined,
-  categories: [],
+  category: '',
   comment_disabled: false,
   importance: 0
 }
@@ -135,7 +135,19 @@ export default {
       }
     }
     return {
-      postForm: Object.assign({}, defaultForm),
+      postForm:{
+        status: 'draft',
+        title: '', // 文章题目
+        content: '', // 文章内容
+        content_short: '', // 文章摘要
+        source_uri: '', // 文章外链
+        image_uri: '', // 文章图片
+        display_time: undefined, // 前台展示时间
+        id: undefined,
+        categories: [],
+        comment_disabled: false,
+        importance: 0
+      },
       loading: false,
       userListOptions: [],
       rules: {
@@ -144,7 +156,8 @@ export default {
         content: [{ validator: validateRequire }],
         source_uri: [{ validator: validateSourceUri, trigger: 'blur' }]
       },
-      tempRoute: {}
+      tempRoute: {},
+      categories:[]
     }
   },
   computed: {
@@ -165,27 +178,29 @@ export default {
     }
   },
   created() {
-    fetchCategory().then(
-      response=>{
-        this.postForm.categories=[response.data]
-      }
-    );
+
     if (this.isEdit) {
       const id = this.$route.params && this.$route.params.id
       this.fetchData(id)
     } else {
       this.postForm = Object.assign({}, defaultForm)
     }
-
     // Why need to make a copy of this.$route here?
     // Because if you enter this page and quickly switch tag, may be in the execution of the setTagsViewTitle function, this.$route is no longer pointing to the current page
     // https://github.com/PanJiaChen/vue-element-admin/issues/1221
     this.tempRoute = Object.assign({}, this.$route)
+
+    fetchCategory().then(
+      response=>{
+        this.categories=response.data
+        console.log(this.categories)
+      }
+    );
   },
   methods: {
     fetchData(id) {
       fetchArticle(id).then(response => {
-        this.postForm = response.data
+        this.postForm= response.data
 
         // just for test
         this.postForm.title += `   Article Id:${this.postForm.id}`
