@@ -193,7 +193,6 @@ export default {
     fetchCategory().then(
       response=>{
         this.categories=response.data
-        console.log(this.categories)
       }
     );
   },
