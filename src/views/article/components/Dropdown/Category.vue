@@ -36,6 +36,7 @@ methods:{
     //UI更新在下一帧 否则取到的值不对
     this.$nextTick(() => {
       this.categorySelected = this.$refs.selectCategory.selectedLabel;
+      this.$emit('input',this.$refs.selectCategory.value)
     })
   }
 }

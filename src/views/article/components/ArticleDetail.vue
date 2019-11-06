@@ -4,7 +4,7 @@
 
       <sticky :z-index="10" :class-name="'sub-navbar '+postForm.status">
         <CommentDropdown v-model="postForm.comment_disabled" />
-        <CategoryDropdown v-model="postForm.category" :options = "this.categories"/>
+        <CategoryDropdown v-model="postForm.category_id" :options = "this.categories"/>
         <SourceUrlDropdown v-model="postForm.source_uri" />
         <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">
           发表
@@ -92,7 +92,7 @@ const defaultForm = {
   image_uri: '', // 文章图片
   display_time: undefined, // 前台展示时间
   id: undefined,
-  category: '',
+  category_id: '',
   comment_disabled: false,
   importance: 0
 }
@@ -226,27 +226,42 @@ export default {
       document.title = `${title} - ${this.postForm.id}`
     },
     submitForm() {
-      console.log(this.postForm)
+      console.log(this.postForm.category);
       this.$refs.postForm.validate(valid => {
         if (valid) {
           this.loading = true
-
+          this.postForm.status = 1;
           new Promise((resolve,reject) =>{
             createArticle(this.postForm).then(
               response=>{
+                if(response.code===20000){
                 this.$notify({
                   title: '成功',
                   message: '发布文章成功',
                   type: 'success',
                   duration: 2000
                 })
-                this.postForm.status = 1;
                 this.loading = false
+              }else{
+                  this.$notify({
+                    title: '错误',
+                    message: response.message,
+                    type: 'fail',
+                    duration: 2000
+                  })
+                }
               }
-            )
+            ).catch(function(error){
+              this.$notify({
+              title: '错误',
+              message: error,
+              type: 'fail',
+              duration: 2000
+            })
+            })
           })
         } else {
-          console.log('发表失败！')
+
           return false
         }
       })
