@@ -14,7 +14,9 @@
 </template>
 
 <script>
+  import {getCategoryById} from '@/api/article';
 export default {
+
   props: {
     value: {
 
@@ -31,7 +33,13 @@ export default {
 
     }
   },
-methods:{
+  mounted(){
+    console.log(this.value);
+    console.log(category)
+    this.fetchCategoryById(this.value)
+
+  },
+  methods:{
   changeSelect(value){
     //UI更新在下一帧 否则取到的值不对
     this.$nextTick(() => {
@@ -39,8 +47,15 @@ methods:{
       console.log(this.$refs.selectCategory)
       this.$emit('input',this.$refs.selectCategory.value)
     })
-  }
-}
+  },
+    fetchCategoryById(id){
+    getCategoryById(id).then(
+      response =>{
+        this.categorySelected =response.data.name;
+      }
+    )
 
+    }
+}
 }
 </script>

@@ -21,6 +21,13 @@ export  function fetchCategory() {
     method:'get',
   })
 }
+export  function getCategoryById(id) {
+  return request({
+    url:'/category/getCategoryById',
+    method:'get',
+    params: { id }
+  })
+}
 
 export function fetchPv(pv) {
   return request({
