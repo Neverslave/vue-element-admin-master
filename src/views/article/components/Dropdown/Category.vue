@@ -1,5 +1,5 @@
 <template>
-  <el-dropdown :hide-on-click="false" :show-timeout="100" trigger="click">
+  <el-dropdown :hide-on-click="false" :show-timeout="100" trigger="click" >
     <el-button plain>
       {{categorySelected}}
       <i class="el-icon-caret-bottom el-icon--right" />
@@ -18,12 +18,12 @@
 export default {
 
   props: {
-    value: {
-
-    },
     options:{
       required:true,
       type:Array
+    },
+    value:{
+
     }
   },
   data() {
@@ -34,8 +34,7 @@ export default {
     }
   },
   mounted(){
-    console.log(this.value);
-    console.log(category)
+    console.log(this.$props);
     this.fetchCategoryById(this.value)
 
   },
@@ -49,7 +48,7 @@ export default {
     })
   },
     fetchCategoryById(id){
-    getCategoryById(id).then(
+    getCategoryById(1).then(
       response =>{
         this.categorySelected =response.data.name;
       }
