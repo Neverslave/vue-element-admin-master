@@ -33,28 +33,32 @@ export default {
 
     }
   },
-  mounted(){
-    console.log(this.$props);
+  created(){
+    if(this.value!==''){
     this.fetchCategoryById(this.value)
-
+    }
   },
-  methods:{
-  changeSelect(value){
-    //UI更新在下一帧 否则取到的值不对
-    this.$nextTick(() => {
-      this.categorySelected = this.$refs.selectCategory.selectedLabel;
-      console.log(this.$refs.selectCategory)
-      this.$emit('input',this.$refs.selectCategory.value)
-    })
-  },
-    fetchCategoryById(id){
-    getCategoryById(1).then(
-      response =>{
-        this.categorySelected =response.data.name;
-      }
-    )
+  methods: {
+    changeSelect(value) {
+      //UI更新在下一帧 否则取到的值不对
+      this.$nextTick(() => {
+        this.categorySelected = this.$refs.selectCategory.selectedLabel;
+        console.log(this.$refs.selectCategory)
+        this.$emit('input', this.$refs.selectCategory.value)
+      })
+    },
+    fetchCategoryById(id) {
+      getCategoryById(id).then(
+        response => {
+          this.categorySelected = response.data.name;
+        }
+      )
 
     }
-}
+  }
+
+  //异步传值导致子组件拿不到
+
+
 }
 </script>

@@ -100,7 +100,7 @@ export default {
       this.listLoading = true
       fetchList(this.listQuery).then(response => {
         this.list = response.data.list
-        this.total = response.data.totalPage;
+        this.total = response.data.totalRow;
         this.listLoading = false
       })
     }

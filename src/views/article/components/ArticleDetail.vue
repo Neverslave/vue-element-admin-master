@@ -4,7 +4,7 @@
 
       <sticky :z-index="10" :class-name="'sub-navbar '+postForm.status">
         <CommentDropdown v-model="postForm.comment_disabled" />
-        <CategoryDropdown v-model="postForm.category_id" :options = "this.categories"/>
+        <CategoryDropdown v-model="postForm.category_id" v-if="this.categories.length!==0" :options = "this.categories"/>
         <SourceUrlDropdown v-model="postForm.source_uri" />
         <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">
           发表
@@ -202,9 +202,6 @@ export default {
       fetchArticle(id).then(response => {
         this.postForm= response.data
 
-        // just for test
-        this.postForm.title += `   Article Id:${this.postForm.id}`
-        this.postForm.content_short += `   Article Id:${this.postForm.id}`
 
         // set tagsview title
         this.setTagsViewTitle();
@@ -217,13 +214,13 @@ export default {
     },
 
     setTagsViewTitle() {
-      const title = 'Edit Article'
-      const route = Object.assign({}, this.tempRoute, { title: `${title}-${this.postForm.id}` })
+      const title = '编辑文章'
+      const route = Object.assign({}, this.tempRoute, { title: `${title}-${this.postForm.title}` })
       this.$store.dispatch('tagsView/updateVisitedView', route)
     },
     setPageTitle() {
-      const title = 'Edit Article'
-      document.title = `${title} - ${this.postForm.id}`
+      const title = '编辑文章'
+      document.title = `${title} - ${this.postForm.title}`
     },
     submitForm() {
       console.log(this.postForm.category);
