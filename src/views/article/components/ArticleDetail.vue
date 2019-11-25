@@ -223,23 +223,52 @@ export default {
       document.title = `${title} - ${this.postForm.title}`
     },
     submitForm() {
-      console.log(this.postForm.category);
       this.$refs.postForm.validate(valid => {
         if (valid) {
           this.loading = true
           this.postForm.status = 1;
-          new Promise((resolve,reject) =>{
-            createArticle(this.postForm).then(
-              response=>{
-                if(response.code===20000){
+          if (this.postForm.id !== undefined) {
+            new Promise((resolve, reject) => {
+              createArticle(this.postForm).then(
+                response => {
+                  if (response.code === 20000) {
+                    this.$notify({
+                      title: '成功',
+                      message: '发布文章成功',
+                      type: 'success',
+                      duration: 2000
+                    })
+                    this.loading = false
+                  } else {
+                    this.$notify({
+                      title: '错误',
+                      message: response.message,
+                      type: 'fail',
+                      duration: 2000
+                    })
+                  }
+                }
+              ).catch(function (error) {
                 this.$notify({
-                  title: '成功',
-                  message: '发布文章成功',
-                  type: 'success',
+                  title: '错误',
+                  message: error,
+                  type: 'fail',
                   duration: 2000
                 })
-                this.loading = false
-              }else{
+              })
+            })
+          } else { //如果是修改
+            updateArticle(this.postForm).then(
+              response => {
+                if (response.code === 20000) {
+                  this.$notify({
+                    title: '成功',
+                    message: '发布文章成功',
+                    type: 'success',
+                    duration: 2000
+                  })
+                  this.loading = false
+                } else {
                   this.$notify({
                     title: '错误',
                     message: response.message,
@@ -248,17 +277,19 @@ export default {
                   })
                 }
               }
-            ).catch(function(error){
+            ).catch(function (error) {
               this.$notify({
-              title: '错误',
-              message: error,
-              type: 'fail',
-              duration: 2000
+                title: '错误',
+                message: error,
+                type: 'fail',
+                duration: 2000
+              })
             })
-            })
-          })
-        } else {
 
+
+          }
+        }
+        else {
           return false
         }
       })
