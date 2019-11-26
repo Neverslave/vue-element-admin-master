@@ -42,7 +42,7 @@
       </el-table-column>
 
       <el-table-column align="center" label="操作" width="120">
-        <template slot-scope="scope">
+        <template slot-scope="{row}">
           <router-link :to="'/article/edit/'+row.id">
             <el-button type="primary" size="small" icon="el-icon-edit">
               编辑

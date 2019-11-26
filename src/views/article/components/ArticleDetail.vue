@@ -227,7 +227,7 @@ export default {
         if (valid) {
           this.loading = true
           this.postForm.status = 1;
-          if (this.postForm.id !== undefined) {
+          if (this.postForm.id === undefined) {
             new Promise((resolve, reject) => {
               createArticle(this.postForm).then(
                 response => {
@@ -263,7 +263,7 @@ export default {
                 if (response.code === 20000) {
                   this.$notify({
                     title: '成功',
-                    message: '发布文章成功',
+                    message: '更新文章成功',
                     type: 'success',
                     duration: 2000
                   })
@@ -285,7 +285,7 @@ export default {
                 duration: 2000
               })
             })
-
+          this.loading=false;
 
           }
         }
