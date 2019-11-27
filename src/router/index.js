@@ -71,9 +71,8 @@ export const constantRoutes = [
     hidden: true
   },
   {
-    path: '/',
+    path: '/dashbord',
     component: Layout,
-    redirect: '/dashboard',
     children: [
       {
         path: 'dashboard',
@@ -139,6 +138,12 @@ export const constantRoutes = [
         meta: { title: '简介', icon: 'user', noCache: true }
       }
     ]
+  },
+  /**
+   * 外部访问首页 ----
+   * */
+  {
+    path:'/blog'
   }
 ]
 
@@ -241,18 +246,6 @@ export const asyncRoutes = [
     ]
   },
 
-  {
-    path: '/tab',
-    component: Layout,
-    children: [
-      {
-        path: 'index',
-        component: () => import('@/views/tab/index'),
-        name: 'Tab',
-        meta: { title: '标签', icon: 'tab' }
-      }
-    ]
-  },
 
   {
     path: '/error',

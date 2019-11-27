@@ -7,7 +7,7 @@
         <el-submenu  v-for="subCategory in category">
           文章分类
           <el-menu-item route="">
-            {{subCategory.name}}
+            {{subCategory.label}}
           </el-menu-item>
         </el-submenu>
         <el-menu-item route="">下载中心</el-menu-item>

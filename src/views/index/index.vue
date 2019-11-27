@@ -2,6 +2,7 @@
 <div>
   <indexMenu category="this.category">
   </indexMenu>
+
 </div>
 </template>
 
@@ -18,7 +19,7 @@
       },
       data(){
           return{
-            category:'',
+            category:[],
 
           }
       },
