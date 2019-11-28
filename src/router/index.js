@@ -143,7 +143,8 @@ export const constantRoutes = [
    * 外部访问首页 ----
    * */
   {
-    path:'/blog'
+    path:'/blog',
+    component:
   }
 ]
 
