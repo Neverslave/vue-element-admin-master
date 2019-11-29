@@ -5,6 +5,7 @@ Vue.use(Router)
 
 /* Layout */
 import Layout from '@/layout'
+import FrontLayout from '@/frontLayout'
 
 /* Router Modules */
 import componentsRouter from './modules/components'
@@ -55,6 +56,20 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
+  /**
+   * 外部访问首页 ----
+   * */
+  {
+    path:'/',
+    redirect:'/blog',
+    component:FrontLayout,
+    children:[
+      {
+        path:'blog',
+
+      }
+    ]
+  },
   {
     path: '/auth-redirect',
     component: () => import('@/views/login/auth-redirect'),
@@ -75,7 +90,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'dashboard',
+        path: 'index',
         component: () => import('@/views/dashboard/index'),
         name: 'Dashboard',
         meta: { title: '控制板', icon: 'dashboard', affix: true }
@@ -139,13 +154,7 @@ export const constantRoutes = [
       }
     ]
   },
-  /**
-   * 外部访问首页 ----
-   * */
-  {
-    path:'/blog',
-    component:
-  }
+
 ]
 
 /**

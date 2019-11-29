@@ -1,10 +1,38 @@
 <template>
-
+<div>
+  <Navigator category="this.category">
+  </Navigator>
+  <MainContainer>
+  </MainContainer>
+  <Footer></Footer>
+</div>
 </template>
 
 <script>
+  import {Navigator,MainContainer,Footer} from './components'
+  import {getCategory} from "@/api/category";
+
+
     export default {
-        name: "index"
+        name: "index",
+      components: {Footer, MainContainer, Navigator},
+      comments:{Navigator,MainContainer,Footer},
+      data(){
+        return{
+          category:[],
+
+        }
+      },
+      created(){
+        new Promise(resolve => {
+          getCategory().then(
+            response=>{
+              this.category = response.data
+            }
+          )
+        })
+      }
+
     }
 </script>
 

@@ -13,6 +13,12 @@
 
 <style scoped>
 .footer{
+  position: fixed;
+  bottom: 20px;
+  width: 20%;
+  text-align: center;
+  margin: 0 auto;
+  left:40%;
 
 }
 </style>

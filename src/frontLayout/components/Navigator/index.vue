@@ -1,16 +1,16 @@
 <template>
   <div>
-    <el-menu  v-bind:menuSettings >
-      <el-menu-item  route="">
+    <el-menu  v-bind="this.menuSettings" >
+      <el-menu-item  route="/blog">
         首页
       </el-menu-item>
       <el-submenu  v-for="subCategory in category">
         文章分类
-        <el-menu-item route="">
+        <el-menu-item route="category">
           {{subCategory.label}}
         </el-menu-item>
       </el-submenu>
-      <el-menu-item route="">下载中心</el-menu-item>
+      <el-menu-item route="download">下载中心</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -26,10 +26,11 @@
       data(){
         return{
           menuSettings:{
-            mode:horizontal ,
+            mode:'horizontal',
             router:true,
-
-
+            backgroundColor:"#545c64",
+            textColor :"#fff",
+            activeTextColor:"#ffd04b",
           }
         }
       },
