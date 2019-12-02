@@ -14,4 +14,11 @@ export function addCategory(data) {
     data
   })
 }
+  export function getSupCategory(data) {
+    return request({
+      url: '/category/getSupCategory',
+      method: 'get',
 
+    })
+
+  }

@@ -1,16 +1,16 @@
 <template>
   <div>
-    <el-menu  v-bind="this.menuSettings" >
-      <el-menu-item  route="/blog">
+    <el-menu v-bind="this.menuSettings"  active-index="1" >
+      <el-menu-item   index="1" route="/blog">
         首页
       </el-menu-item>
-      <el-submenu  v-for="subCategory in category">
-        文章分类
-        <el-menu-item route="category">
-          {{subCategory.label}}
+      <el-submenu index="2" route="/blog/category" popper-append-to-body="false" >
+        <template slot="title">文章分类</template>
+        <el-menu-item index="subCategory.id"   v-for="subCategory in category">
+         {{subCategory.name}}
         </el-menu-item>
       </el-submenu>
-      <el-menu-item route="download">下载中心</el-menu-item>
+      <el-menu-item route="download" index="3">下载中心</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -34,6 +34,9 @@
           }
         }
       },
+      mounted(){
+        console.log(this.category)
+      }
     }
 </script>
 

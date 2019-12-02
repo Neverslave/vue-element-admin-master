@@ -10,7 +10,7 @@
 
 <script>
   import {Navigator,MainContainer,Footer} from './components'
-  import {getCategory} from "@/api/category";
+  import {getSupCategory} from "@/api/category";
 
 
     export default {
@@ -25,9 +25,10 @@
       },
       created(){
         new Promise(resolve => {
-          getCategory().then(
+          getSupCategory().then(
             response=>{
               this.category = response.data
+              console.log(this.category)
             }
           )
         })
