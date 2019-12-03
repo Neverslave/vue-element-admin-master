@@ -4,9 +4,9 @@
       <el-menu-item   index="1" route="/blog">
         首页
       </el-menu-item>
-      <el-submenu index="2" route="/blog/category" popper-append-to-body="false" >
+      <el-submenu index="2" route="/blog/category" >
         <template slot="title">文章分类</template>
-        <el-menu-item index="subCategory.id"   v-for="subCategory in category">
+        <el-menu-item   v-for="(subCategory,index) in category" :key="index" :route="subCategory.name">
          {{subCategory.name}}
         </el-menu-item>
       </el-submenu>
@@ -34,9 +34,7 @@
           }
         }
       },
-      mounted(){
-        console.log(this.category)
-      }
+
     }
 </script>
 

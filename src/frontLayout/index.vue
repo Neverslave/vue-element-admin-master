@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Navigator category="this.category">
+  <Navigator  :category="this.category">
   </Navigator>
   <MainContainer>
   </MainContainer>
@@ -28,7 +28,6 @@
           getSupCategory().then(
             response=>{
               this.category = response.data
-              console.log(this.category)
             }
           )
         })
