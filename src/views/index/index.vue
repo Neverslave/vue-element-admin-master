@@ -1,19 +1,19 @@
 <template>
-<div>
-
+<div class="index-contianer" >
+<div>您是第{{vistors}}访问者，欢迎</div>
+  <div>当前文章总数{{pageNumber}}</div>
+  <div></div>
 </div>
 </template>
 
 <script>
-  import {getCategory} from "@api/category";
+
 
 
 
   export default {
-        name: "index",
-      comments:{
-          indexMenu
-      },
+    name: "index",
+    
 
 
 
@@ -21,5 +21,7 @@
 </script>
 
 <style scoped>
-
+index-container{
+  background: url("/src/assets/front_images/indexbg.jpg");
+}
 </style>

@@ -1,16 +1,14 @@
 <template>
   <div>
-    <el-menu v-bind="this.menuSettings"  active-index="1" >
+    <el-menu v-bind="this.menuSettings"   >
       <el-menu-item   index="1" route="/blog">
         首页
       </el-menu-item>
-      <el-submenu index="2" route="/blog/category" >
-        <template slot="title">文章分类</template>
-        <el-menu-item   v-for="(subCategory,index) in category" :key="index" :route="subCategory.name">
-         {{subCategory.name}}
-        </el-menu-item>
-      </el-submenu>
-      <el-menu-item route="download" index="3">下载中心</el-menu-item>
+      <el-menu-item index="2" route="/blog/category" >
+        文章
+      </el-menu-item>
+
+      <el-menu-item route="download" index="3" router="">下载中心</el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -18,11 +16,12 @@
 <script>
     export default {
       name: "Navigator",
-      props:{
-        category:{
-          required:true,
+      prop:{
+        activeIndex:{ 
+          required:true
         }
       },
+
       data(){
         return{
           menuSettings:{

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Navigator  :category="this.category">
+  <Navigator >
   </Navigator>
   <MainContainer>
   </MainContainer>
@@ -19,19 +19,11 @@
       comments:{Navigator,MainContainer,Footer},
       data(){
         return{
-          category:[],
+
 
         }
       },
-      created(){
-        new Promise(resolve => {
-          getSupCategory().then(
-            response=>{
-              this.category = response.data
-            }
-          )
-        })
-      }
+
 
     }
 </script>

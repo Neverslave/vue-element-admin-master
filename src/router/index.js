@@ -12,6 +12,7 @@ import componentsRouter from './modules/components'
 import chartsRouter from './modules/charts'
 import tableRouter from './modules/table'
 import nestedRouter from './modules/nested'
+import frontRouter from './modules/front'
 
 /**
  * Note: sub-menu only appear when route children.length >= 1
@@ -56,20 +57,8 @@ export const constantRoutes = [
     component: () => import('@/views/login/index'),
     hidden: true
   },
-  /**
-   * 外部访问首页 ----
-   * */
-  {
-    path:'/',
-    redirect:'/blog',
-    component:FrontLayout,
-    children:[
-      {
-        path:'blog',
 
-      }
-    ]
-  },
+
   {
     path: '/auth-redirect',
     component: () => import('@/views/login/auth-redirect'),
@@ -218,10 +207,12 @@ export const asyncRoutes = [
   },
 
   /** when your routing map is too long, you can split it into small modules **/
+  frontRouter,
   componentsRouter,
   chartsRouter,
   nestedRouter,
   tableRouter,
+
 
 
   {
