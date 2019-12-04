@@ -11,4 +11,4 @@ const frontRouter = {
   }
 ]
 }
-
+export  default frontRouter;
