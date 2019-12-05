@@ -7,8 +7,11 @@ const frontRouter = {
   {
     path:'blog',
     component: ()=>import('@/views/index/index')
-
-  }
+  },
+    {
+      path:'/blog/article',
+      component:()=>import('@/views/essay/index')
+    }
 ]
 }
 export  default frontRouter;

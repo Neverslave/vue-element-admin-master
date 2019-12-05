@@ -4,7 +4,7 @@
       <el-menu-item   index="1" route="/blog">
         首页
       </el-menu-item>
-      <el-menu-item index="2" route="/blog/category" >
+      <el-menu-item index="2" route="/blog/article" >
         文章
       </el-menu-item>
 
@@ -17,7 +17,7 @@
     export default {
       name: "Navigator",
       prop:{
-        activeIndex:{ 
+        activeIndex:{
           required:true
         }
       },
