@@ -10,7 +10,11 @@ const frontRouter = {
   },
     {
       path:'/blog/article',
-      component:()=>import('@/views/essay/index')
+      component: ()=>import('@/views/essay/index')
+    },
+    {
+      path:'/blog/article/:id(\\d+)',
+      component:()=>import('@/views/essay/detail')
     }
 ]
 }
